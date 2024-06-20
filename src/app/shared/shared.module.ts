@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { BreadcumbsComponent } from './components/breadcumbs/breadcumbs.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { RouterModule } from '@angular/router';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 
@@ -10,10 +12,12 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
   declarations: [
     BreadcumbsComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    DashboardComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ]
 })
 export class SharedModule { }

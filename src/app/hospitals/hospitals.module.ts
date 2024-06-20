@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HospitalComponent } from './pages/hospital.component';
+import { RoutingModuleHospitals } from './hospitals-routing.module';
 
 
 
@@ -9,7 +10,8 @@ import { HospitalComponent } from './pages/hospital.component';
     HospitalComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RoutingModuleHospitals
   ]
 })
 export class HospitalsModule { }
