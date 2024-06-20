@@ -9,25 +9,15 @@ import { filter, map, Subscription } from 'rxjs';
 })
 export class BreadcumbsComponent {
 
-  public titulo!: string;
-  public tituloSubs$: Subscription;
+  public titulo: string = 'Testss';
+  // public tituloSubs$: Subscription;
 
 
   constructor(private router: Router){
-    this.tituloSubs$ = this.getArgumentosRuta()
-    .subscribe( ({ titulo }) => {
-        this.titulo = titulo;
-        document.title = `AdminPro - ${ titulo }`;
-    });
-  }
-
-  getArgumentosRuta() {
-
-    return this.router.events
-      .pipe(
-        filter( event => event instanceof ActivationEnd ),
-        filter( (event: ActivationEnd) => event.snapshot.firstChild === null  ),
-        map( (event: ActivationEnd) => event.snapshot.data ),
-      );
+    // this.tituloSubs$ = this.getArgumentosRuta()
+    // .subscribe( ({ titulo }) => {
+    //     this.titulo = titulo;
+    //     document.title = `AdminPro - ${ titulo }`;
+    // });
   }
 }

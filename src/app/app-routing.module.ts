@@ -16,8 +16,12 @@ const routes: Routes = [
     loadChildren: () => import('./hospitals/hospitals.module').then( m => m.HospitalsModule)
   },
   {
+    path: 'dashboard',
+    loadChildren: () => import('./pages/pages.module').then( m => m.PagesModule)
+  },
+  {
     path: '**', redirectTo: '/', pathMatch: 'full'
-  }
+  },
 ];
 
 @NgModule({

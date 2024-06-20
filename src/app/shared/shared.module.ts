@@ -18,6 +18,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
   imports: [
     CommonModule,
     RouterModule
+  ],
+  exports: [
+    BreadcumbsComponent,
+    HeaderComponent,
+    SidebarComponent,
+    DashboardComponent
   ]
 })
 export class SharedModule { }
