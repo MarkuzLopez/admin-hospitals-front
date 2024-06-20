@@ -5,19 +5,19 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('@auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'doctors',
-    loadChildren: () => import('./doctors/doctors.module').then(m => m.DoctorsModule)
+    loadChildren: () => import('@doctors/doctors.module').then(m => m.DoctorsModule)
   },
   {
     path: 'hospitals',
-    loadChildren: () => import('./hospitals/hospitals.module').then( m => m.HospitalsModule)
+    loadChildren: () => import('@hospitals/hospitals.module').then( m => m.HospitalsModule)
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./pages/pages.module').then( m => m.PagesModule)
+    loadChildren: () => import('@pages/pages.module').then( m => m.PagesModule)
   },
   {
     path: '**', redirectTo: '/', pathMatch: 'full'
