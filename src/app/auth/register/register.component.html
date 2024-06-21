@@ -82,9 +82,10 @@
         </div>
 
         <div class="row">
-            <div class="col text-danger">
+            <div class="col text-danger">                
                 <p *ngIf="validateForm()" > Todos los campos obligatorios</p>
                 <p *ngIf="acceptTerms()"> Debe Aceptar terminos de condiciones</p>
+                <p *ngIf="validatePassword()"> las contraseñas no coinciden, verificar</p>
             </div>
         </div>
 
