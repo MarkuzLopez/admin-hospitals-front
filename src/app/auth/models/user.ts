@@ -1,8 +1,10 @@
-interface Usuario { 
+export interface User { 
     uid?: string;
     email: string;
+    nombre: string;
     img?: string;
     google?: boolean;
     role?: string;    
-    nombre: string;
+    password?: string;
+    terms?: string
 }

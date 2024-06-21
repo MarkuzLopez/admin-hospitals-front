@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from '@auth/models/user';
+import { AuthService } from '@auth/service/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,8 +13,9 @@ export class RegisterComponent {
 
   registerForm!: FormGroup;
   formSubmited: boolean =  false;
+  modelRegisterBD!: User;
 
-  constructor(private router:  Router, private formBuilder: FormBuilder){
+  constructor(private router:  Router, private formBuilder: FormBuilder, private authService: AuthService){
   }
   
   ngOnInit(): void {
@@ -22,7 +25,7 @@ export class RegisterComponent {
 
   private initiForm(): void{
    this.registerForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      name: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required, Validators.minLength(5)]],
       confirmPassword: ['', Validators.required],
@@ -36,20 +39,19 @@ export class RegisterComponent {
     this.formSubmited = true;    
       if( this.registerForm.valid && !this.acceptTerms()){
         console.log(this.registerForm.value, 'formulario posteado..' );
-        // this.registerForm.reset()
+        this.modelRegisterBD = { 
+          nombre: this.registerForm.get('name')?.value,
+          email: this.registerForm.get('email')?.value,
+          password: this.registerForm.get('password')?.value
+        }
+        
+        this.authService.createUser(this.modelRegisterBD).subscribe((user) => {
+          console.log(user, 'user creado');          
+        }, (error) => { 
+          console.warn(error?.error?.msg, 'error al crear usuario');
+        })
       }    
   }
-
-
-  // onSubmit(): void {
-  //   this.formSubmited = true;
-  //   if(this.validatePassword()) {
-  //     if( this.registerForm.valid && !this.acceptTerms()){
-  //       console.log(this.registerForm.value, 'formulario posteado..' );
-  //       this.registerForm.reset()
-  //     }
-  //   }
-  // }
 
   validatePassword(): boolean { 
     const password = this.registerForm.get('password')?.value;
