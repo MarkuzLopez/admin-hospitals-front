@@ -1,23 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+
+declare const google: any;
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit, AfterViewInit{
+
+  @ViewChild('googleBtn') googleBtn!: ElementRef
 
   formLogin!: FormGroup;
   submitted = false;
   msg!: string;
   constructor(private router:  Router, private formBuilder: FormBuilder, private authService:  AuthService){
   }
+
   
   ngOnInit(): void {    
     this.initiForm();    
+  }
+  
+  ngAfterViewInit(): void {
+   this.googleInit()
+  }
+
+  googleInit() { 
+    google.accounts.id.initialize({
+      client_id: "475664057489-8frl1kjpffg1c5llb8r9vq996qlod27e.apps.googleusercontent.com",
+      callback: this.handleCredentialResponse
+    });
+    google.accounts.id.renderButton(
+      // document.getElementById("buttonDiv"),
+      this.googleBtn.nativeElement,
+      { theme: "outline", size: "large" }  // customization attributes
+    );
+  }
+
+  handleCredentialResponse(response: any){
+     console.log("Encoded JWT ID token: " + response.credential);
   }
 
 

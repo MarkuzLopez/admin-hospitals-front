@@ -25,3 +25,8 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## for authenticated with google the documentattion is:
+- https://console.cloud.google.com/apis/credentials/oauthclient/475664057489-8frl1kjpffg1c5llb8r9vq996qlod27e.apps.googleusercontent.com?project=angular-signin-425517  [for add keys and apis].
+
+- https://developers.google.com/identity/gsi/web/guides/automatic-sign-in-sign-out [documentation of google sign In]
