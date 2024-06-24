@@ -29,5 +29,14 @@ export class AuthService {
       })
     );
   }
+
+  loginGoogleSignIn(token: string): Observable<any> { 
+    return this.http.post(`${this.baseUrl}/auth/googleSignIn`, { token })
+    .pipe(
+      tap((response: any) => {        
+        localStorage.setItem('token', response?.token);
+      })
+    )
+  }
 }
 // tap es otro operador observable que dispara otro efecto secundario.
