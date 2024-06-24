@@ -46,8 +46,10 @@ export class RegisterComponent {
         }
         
         this.authService.createUser(this.modelRegisterBD).subscribe((user) => {
-          console.log(user, 'user creado');          
+          // TODO pending for alerts msgs 
+          console.log(user, 'user creado');     
         }, (error) => { 
+          // TODO pending for alerts msgs 
           console.warn(error?.error?.msg, 'error al crear usuario');
         })
       }    
