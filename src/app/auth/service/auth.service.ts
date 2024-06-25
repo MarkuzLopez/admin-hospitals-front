@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Login } from '@auth/models/login';
 import { User } from '@auth/models/user';
-import { Observable, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environment';
 
 @Injectable({
@@ -38,5 +38,23 @@ export class AuthService {
       })
     )
   }
+
+  tokenValidation(): Observable<boolean> {
+    const token = localStorage.getItem('token') || ''; 
+
+    return this.http.get(`${this.baseUrl}/auth/renew`,  { 
+      headers: {
+        'x-token': token
+      }
+    })
+    .pipe(
+      tap((resp: any) => { 
+        localStorage.setItem('token', resp?.token);
+      }),
+      map(resp => true),
+      catchError( error => of(false))
+    );
+  }
+  
 }
 // tap es otro operador observable que dispara otro efecto secundario.
