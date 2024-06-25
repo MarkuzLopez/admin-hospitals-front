@@ -1,32 +1,25 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, ActivationEnd, Router } from '@angular/router';
-import { filter, map, Subscription } from 'rxjs';
+import { ActivationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-breadcumbs',
   templateUrl: './breadcumbs.component.html',
   styleUrls: ['./breadcumbs.component.css'],
 })
-export class BreadcumbsComponent {
-  public title!: string;
+export class BreadcumbsComponent { 
+  currentRoute!: string;
 
   constructor(private router: Router) {
-    this.router.events
-      .pipe(
-        filter<any>((event) => event instanceof ActivationEnd),
-        filter((event: ActivationEnd) => event.snapshot.firstChild === null),
-        map((event: ActivationEnd) => event.snapshot.data)
-      )
-      .subscribe((data) => {
-        console.log(data, 'ada');
-        
-        // this.title = data.title;
-      });
+    this.getRouteActivate();
+  }
 
-    // this.tituloSubs$ = this.getArgumentosRuta()
-    // .subscribe( ({ titulo }) => {
-    //     this.titulo = titulo;
-    //     document.title = `AdminPro - ${ titulo }`;
-    // });
+  getRouteActivate(): void {
+    this.router.events
+      .pipe(filter((event: any) => event instanceof ActivationEnd))
+      .subscribe((event: ActivationEnd) => {
+        this.currentRoute = event.snapshot.routeConfig?.path || 'root';
+        console.log('Current Route:', this.currentRoute);
+      });
   }
 }
