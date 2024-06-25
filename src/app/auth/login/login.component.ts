@@ -65,10 +65,8 @@ export class LoginComponent implements OnInit, AfterViewInit{
   onLogin() {
     this.submitted = true;
     if(this.formLogin.valid) {
-      // TODO  alerts for msg
-      console.log('asda', this.formLogin.value);
-      this.authService.loginUser(this.formLogin.value).subscribe((resonse) => { 
-        console.log(resonse, 'tokens');
+      // TODO  alerts for msg      
+      this.authService.loginUser(this.formLogin.value).subscribe((resonse) => {         
         this.rememberEmail();
         this.router.navigateByUrl('/dashboard')
       }, ({error}) => {
@@ -77,7 +75,7 @@ export class LoginComponent implements OnInit, AfterViewInit{
         
       })
     }
-    console.log('campos obligatorios'); 
+    
   }
 
   rememberEmail (): void { 

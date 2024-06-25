@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '@auth/service/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  constructor(private authService: AuthService) { 
+    console.log('Header Component');
+  }
+
+  onLogout(): void {
+    this.authService.onLogout();    
+  }
 }
