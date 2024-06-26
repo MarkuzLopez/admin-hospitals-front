@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 
+export interface MenuItems { 
+  title: string;
+  icon: string;
+  route: string
+}
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -7,22 +13,31 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
-  menuItems: any[] = [
+  menuItems: MenuItems[] = [
     {
-      titulo: 'Dashboard',
-      icono: 'mdi mdi-gauge',
-      submenu: [
-        { titulo: 'Main', url: '/' },
-        { titulo: 'Gráficas', url: 'grafica1' },
-        { titulo: 'rxjs', url: 'rxjs' },
-        { titulo: 'Promesas', url: 'promesas' },
-        { titulo: 'ProgressBar', url: 'progress' },
-      ]
+      title: 'Dashboard',
+      icon: 'mdi mdi-gauge',
+      route: '/'
     },
+    {
+      title: 'Hospitals',
+      icon: 'mdi mdi-gauge',
+      route: '/hospitals'
+    },
+    {
+      title: 'Medicos',
+      icon: 'mdi mdi-gauge',
+      route: '/doctors'
+    },
+    {
+      title: 'Users',
+      icon: 'mdi mdi-gauge',
+      route: '/'
+    }
   ];
 
   constructor(){
-    console.log(this.menuItems);
+    
     
   }
 }

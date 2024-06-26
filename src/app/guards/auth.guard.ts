@@ -11,7 +11,7 @@ export const authGuard: CanActivateFn = (route, state)  => {
   return inject(AuthService).tokenValidation().pipe(
     take(1),
     tap((isAuthenticated: any) => {
-      if(!isAuthenticated) router.navigateByUrl('/login')
+      if(!isAuthenticated) router.navigateByUrl('/auth/login')
       // if (!isAuthenticated) {       
       //   console.log('entra la funcion');
       //   return router.navigateByUrl('/login');

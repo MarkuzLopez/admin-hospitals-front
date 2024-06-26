@@ -12,6 +12,9 @@ import { RoutingModuleHospitals } from './hospitals-routing.module';
   imports: [
     CommonModule,
     RoutingModuleHospitals
+  ],
+  exports: [ 
+    HospitalComponent
   ]
 })
 export class HospitalsModule { }

@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class HospitalComponent {
 
+  constructor() {
+    console.log('si entraaa aqui');
+    
+  }
+  
 }

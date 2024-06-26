@@ -5,10 +5,10 @@
     "baseUrl": "./",
     "paths": {
       "@auth/*": ["./src/app/auth/*"],
-      "@doctors/*": ["./src/app/doctors/*"],
+      "@doctors/*": ["src/app/pages/modules/doctors/*"],
       "@shared/*": ["./src/app/shared/*"],
       "@pages/*": ["./src/app/pages/*"],
-      "@hospitals/*": ["./src/app/hospitals/*"]
+      "@hospitals/*": ["src/app/pages/modules/hospitals/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

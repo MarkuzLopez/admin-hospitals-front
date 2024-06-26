@@ -18,8 +18,7 @@ export class BreadcumbsComponent {
     this.router.events
       .pipe(filter((event: any) => event instanceof ActivationEnd))
       .subscribe((event: ActivationEnd) => {
-        this.currentRoute = event.snapshot.routeConfig?.path || 'root';
-        console.log('Current Route:', this.currentRoute);
+        this.currentRoute = event.snapshot.routeConfig?.path || 'root';       
       });
   }
 }
