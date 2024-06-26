@@ -8,7 +8,7 @@
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",      
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -91,11 +91,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "371ef1c3-01d7-402e-8d3f-a559ded2f3bb"
+    "analytics": "371ef1c3-01d7-402e-8d3f-a559ded2f3bb",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

@@ -30,3 +30,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - https://console.cloud.google.com/apis/credentials/oauthclient/475664057489-8frl1kjpffg1c5llb8r9vq996qlod27e.apps.googleusercontent.com?project=angular-signin-425517  [for add keys and apis].
 
 - https://developers.google.com/identity/gsi/web/guides/automatic-sign-in-sign-out [documentation of google sign In]
+
+## Install Package for Husky.
+- npm install husky lint-staged --save-dev
+- npx husky install
+- npx husky add .husky/pre-commit "npm run lint-staged"
