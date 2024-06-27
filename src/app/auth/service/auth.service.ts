@@ -16,6 +16,7 @@ declare const google: any;
 })
 export class AuthService {
 	private readonly baseUrl = environment.apiUrl;
+	usuario!: User;
 
 	constructor(
 		private http: HttpClient,
@@ -23,10 +24,8 @@ export class AuthService {
 		private ngzone: NgZone
 	) {}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	// TODO make interface for retorned
-	createUser(user: User): Observable<any> {
-		return this.http.post(`${this.baseUrl}/usuarios/create`, user).pipe(
+	createUser(user: User): Observable<ResponseRequest> {
+		return this.http.post<ResponseRequest>(`${this.baseUrl}/usuarios/create`, user).pipe(
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			tap((res: any) => {
 				localStorage.setItem('token', res.token);
@@ -34,21 +33,17 @@ export class AuthService {
 		);
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	// TODO make interface for retorned
-	loginUser(user: Login): Observable<any> {
-		return this.http.post(`${this.baseUrl}/auth/login`, user).pipe(
-			tap((response: any) => {
+	loginUser(user: Login): Observable<ResponseRequest> {
+		return this.http.post<ResponseRequest>(`${this.baseUrl}/auth/login`, user).pipe(
+			tap((response: ResponseRequest) => {
 				localStorage.setItem('token', response?.token);
 			})
 		);
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	// TODO make interface for retorned
-	loginGoogleSignIn(token: string): Observable<any> {
-		return this.http.post(`${this.baseUrl}/auth/googleSignIn`, { token }).pipe(
-			tap((response: any) => {
+	loginGoogleSignIn(token: string): Observable<ResponseRequest> {
+		return this.http.post<ResponseRequest>(`${this.baseUrl}/auth/googleSignIn`, { token }).pipe(
+			tap((response: ResponseRequest) => {
 				localStorage.setItem('token', response?.token);
 			})
 		);
@@ -66,6 +61,16 @@ export class AuthService {
 			.pipe(
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				tap((resp: any) => {
+					const { email, google, nombre, role, uid } = resp.usuario;
+
+					this.usuario = {
+						email,
+						google,
+						nombre,
+						role,
+						uid
+					};
+
 					localStorage.setItem('token', resp?.token);
 				}),
 				map(() => true),
@@ -86,4 +91,10 @@ export class AuthService {
 		});
 	}
 }
-// tap es otro operador observable que dispara otro efecto secundario.
+
+export interface ResponseRequest {
+	ok: true;
+	msg?: string;
+	usuario?: User;
+	token: string;
+}
