@@ -3,18 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HospitalComponent } from './pages/hospital.component';
 import { RoutingModuleHospitals } from './hospitals-routing.module';
 
-
-
 @NgModule({
-  declarations: [
-    HospitalComponent
-  ],
-  imports: [
-    CommonModule,
-    RoutingModuleHospitals
-  ],
-  exports: [ 
-    HospitalComponent
-  ]
+	declarations: [HospitalComponent],
+	imports: [CommonModule, RoutingModuleHospitals],
+	exports: [HospitalComponent]
 })
-export class HospitalsModule { }
+export class HospitalsModule {}

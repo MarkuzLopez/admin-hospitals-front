@@ -8,13 +8,13 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint --fix",
-    "prepare": "husky install",
+    "prepare": "husky",
     "*.ts": "eslint --fix",
     "*.html": "prettier --write",
     "pre-commit": "lint-staged",
     "format": "prettier --write \"./src/**/*.{ts,json,html}\"",
-		"lint-format": "npm run format &&  ng lint --fix",
-		"format-pretty-quick": "pretty-quick --pattern \"src/**/*.*(ts|json|html|scss)\" --staged",
+    "lint-format": "npm run format &&  ng lint --fix",
+    "format-pretty-quick": "pretty-quick --pattern \"src/**/*.*(ts|json|html|scss)\" --staged"
   },
   "private": true,
   "dependencies": {

@@ -3,20 +3,18 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '@auth/service/auth.service';
 import { take, tap } from 'rxjs';
 
-export const authGuard: CanActivateFn = (route, state)  => {
+export const authGuard: CanActivateFn = () => {
+	// const authService = Inject(AuthService);
+	const router = inject(Router);
 
-  // const authService = Inject(AuthService);
-  const router = inject(Router)
-  
-  return inject(AuthService).tokenValidation().pipe(
-    take(1),
-    tap((isAuthenticated: any) => {
-      if(!isAuthenticated) router.navigateByUrl('/auth/login')
-      // if (!isAuthenticated) {       
-      //   console.log('entra la funcion');
-      //   return router.navigateByUrl('/login');
-      // }
-      // return true
-    })
-  );
+	return inject(AuthService)
+		.tokenValidation()
+		.pipe(
+			take(1),
+			// TODO  verify type is boolean or string
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			tap((isAuthenticated: any) => {
+				if (!isAuthenticated) router.navigateByUrl('/auth/login');
+			})
+		);
 };
