@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from '@auth/models/user';
+import { AuthService } from '@auth/service/auth.service';
 
 export interface MenuItems {
 	title: string;
@@ -12,6 +14,13 @@ export interface MenuItems {
 	styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+	imgTemplate!: string;
+	user!: User;
+	constructor(private authService: AuthService) {
+		this.imgTemplate = this.authService.getImageUsr();
+		this.user = this.authService.usuario;
+	}
+
 	menuItems: MenuItems[] = [
 		{
 			title: 'Dashboard',

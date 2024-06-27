@@ -91,16 +91,16 @@
 						data-toggle="dropdown"
 						aria-haspopup="true"
 						aria-expanded="false"
-						><img src="./assets/images/users/1.jpg" alt="user" class="profile-pic"
+						><img [src]="imgTemplate" alt="user" class="profile-pic"
 					/></a>
 					<div class="dropdown-menu dropdown-menu-right animated fadeIn fast">
 						<ul class="dropdown-user">
 							<li>
 								<div class="dw-user-box">
-									<div class="u-img"><img src="./assets/images/users/1.jpg" alt="user" /></div>
+									<div class="u-img"><img [src]="imgTemplate" alt="user" /></div>
 									<div class="u-text">
 										<h4>Steave Jobs</h4>
-										<p class="text-muted">markuz[arroba]gmail.com</p>
+										<p class="text-muted">{{ user.email }}</p>
 										<a class="btn btn-rounded btn-danger btn-sm">View Profile</a>
 									</div>
 								</div>

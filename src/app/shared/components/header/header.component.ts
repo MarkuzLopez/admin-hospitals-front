@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from '@auth/models/user';
 import { AuthService } from '@auth/service/auth.service';
 
 @Component({
@@ -7,8 +8,11 @@ import { AuthService } from '@auth/service/auth.service';
 	styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+	imgTemplate!: string;
+	user!: User;
 	constructor(private authService: AuthService) {
-		console.log('Header Component');
+		this.user = authService.usuario;
+		this.imgTemplate = authService.getImageUsr();
 	}
 
 	onLogout(): void {

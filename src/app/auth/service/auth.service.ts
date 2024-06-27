@@ -61,14 +61,15 @@ export class AuthService {
 			.pipe(
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				tap((resp: any) => {
-					const { email, google, nombre, role, uid } = resp.usuario;
+					const { email, google, nombre, role, uid, img } = resp.usuario;
 
 					this.usuario = {
 						email,
 						google,
 						nombre,
 						role,
-						uid
+						uid,
+						img
 					};
 
 					localStorage.setItem('token', resp?.token);
@@ -89,6 +90,16 @@ export class AuthService {
 			localStorage.removeItem('token');
 			localStorage.removeItem('email');
 		});
+	}
+
+	getImageUsr(): string {
+		let imgUrl: string;
+		if (this.usuario.img) {
+			imgUrl = environment.apiUrl + '/upload/usuarios/' + this.usuario.img;
+		} else {
+			imgUrl = environment.apiUrl + '/upload/usuarios/no-image';
+		}
+		return imgUrl;
 	}
 }
 
