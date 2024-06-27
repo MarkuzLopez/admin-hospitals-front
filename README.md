@@ -35,3 +35,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - npm install husky lint-staged --save-dev
 - npx husky install
 - npx husky add .husky/pre-commit "npm run lint-staged"
+
+
+## for rule of eslint: 
+- https://github.com/typescript-eslint/typescript-eslint
+
+## prettier docs, for identation:
+- https://prettier.io/playground/
+
+
+- https://github.com/jimyhdolores/config-eslint-prettier-husky-angular/blob/main/README.md
