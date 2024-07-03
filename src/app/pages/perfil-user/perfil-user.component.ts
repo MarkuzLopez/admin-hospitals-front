@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '@auth/models/user';
 import { AuthService } from '@auth/service/auth.service';
+import { UploadFileService } from '@pages/services/upload-file.service';
 
 @Component({
 	selector: 'app-perfil-user',
@@ -13,12 +14,14 @@ export class PerfilUserComponent {
 	formProfile!: FormGroup;
 	user!: User;
 	imgUpload!: boolean;
-	image!: File;
-	imgTemp: any = null;
+	fileImage!: File;
+	imgTemp!: any | null;
+	typeCollectionDB!: string | 'usuarios' | 'medico' | 'hospitales';
 
 	constructor(
 		private fbBuilder: FormBuilder,
-		private authService: AuthService
+		private authService: AuthService,
+		private uploaService: UploadFileService
 	) {
 		this.user = this.authService.usuario;
 		this.initForm();
@@ -46,11 +49,39 @@ export class PerfilUserComponent {
 		}
 	}
 
-	onChangeImg(event: Event): void {
-		console.log(event);
+	onFileSelected(event: any): void {
+		this.fileImage = event.target.files[0];
+		this.previewImg();
+	}
+
+	previewImg(): void {
+		if (this.fileImage) {
+			this.imgTemp = null;
+		}
+
+		const reader = new FileReader();
+		reader.readAsDataURL(this.fileImage);
+
+		reader.onloadend = (): void => {
+			this.imgTemp = reader.result;
+		};
 	}
 
 	uploadImagen(): void {
-		console.log('entrooo function');
+		if (this.fileImage) {
+			const formData = new FormData();
+			formData.append('imagen', this.fileImage);
+
+			this.uploaService
+				.updatePhoto(formData, 'usuarios')
+				.then((img) => {
+					console.log(img, 'values');
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			console.warn('error al subir archivo');
+		}
 	}
 }
