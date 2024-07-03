@@ -100,8 +100,8 @@
 									<div class="u-img"><img [src]="imgTemplate" alt="user" /></div>
 									<div class="u-text">
 										<h4>Steave Jobs</h4>
-										<p class="text-muted">{{ user.email }}</p>
-										<a class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+										<p class="text-muted">{{ user.email | slice: 0 : 20 }}</p>
+										<a class="btn btn-rounded btn-danger btn-sm" routerLink="/profile">View Profile</a>
 									</div>
 								</div>
 							</li>

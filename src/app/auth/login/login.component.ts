@@ -46,10 +46,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	handleCredentialResponse(response: any): void {
-		console.log('Encoded JWT ID token: ' + response.credential);
+		// console.log('Encoded JWT ID token: ' + response.credential);
 		this.authService.loginGoogleSignIn(response.credential).subscribe(
 			() => {
-				console.log('response', response);
 				this.router.navigateByUrl('/dashboard');
 			},
 			(error) => {

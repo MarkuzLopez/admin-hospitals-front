@@ -26,11 +26,18 @@ export class AuthService {
 
 	createUser(user: User): Observable<ResponseRequest> {
 		return this.http.post<ResponseRequest>(`${this.baseUrl}/usuarios/create`, user).pipe(
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			tap((res: any) => {
-				localStorage.setItem('token', res.token);
+			tap((response) => {
+				localStorage.setItem('token', response.token);
 			})
 		);
+	}
+
+	updateProfile(user: User): Observable<ResponseRequest> {
+		return this.http.put<ResponseRequest>(`${this.baseUrl}/usuarios/update/${this.usuario.uid}`, user, {
+			headers: {
+				'x-token': this.getToken()
+			}
+		});
 	}
 
 	loginUser(user: Login): Observable<ResponseRequest> {
@@ -50,12 +57,12 @@ export class AuthService {
 	}
 
 	tokenValidation(): Observable<boolean> {
-		const token = localStorage.getItem('token') || '';
+		// const token = localStorage.getItem('token') || '';
 
 		return this.http
 			.get(`${this.baseUrl}/auth/renew`, {
 				headers: {
-					'x-token': token
+					'x-token': this.getToken()
 				}
 			})
 			.pipe(
@@ -71,7 +78,6 @@ export class AuthService {
 						uid,
 						img
 					};
-
 					localStorage.setItem('token', resp?.token);
 				}),
 				map(() => true),
@@ -79,11 +85,21 @@ export class AuthService {
 			);
 	}
 
+	// uploadImg(): Observable<any> {
+	// 	const formData = new FormData();
+	// 	const imgTemp = localStorage.getItem('imgTemp');
+	// 	formData.append('img', imgTemp!);
+
+	// 	return this.http.post(`${this.baseUrl}/usuarios/actualizar-imagen`, formData, {
+	// 		headers: {
+	// 			'x-token': this.getToken()
+	// 		}
+	// 	});
+	// }
+
 	onLogout(): void {
 		const email = localStorage.getItem('email') || '';
 		google.accounts.oauth2.revoke(email, () => {
-			console.log('entraaa', email);
-
 			this.ngzone.run(() => {
 				this.router.navigateByUrl('/login');
 			});
@@ -94,12 +110,18 @@ export class AuthService {
 
 	getImageUsr(): string {
 		let imgUrl: string;
-		if (this.usuario.img) {
+		if (this.usuario.google) {
+			imgUrl = this.usuario.img || '';
+		} else if (this.usuario.img) {
 			imgUrl = environment.apiUrl + '/upload/usuarios/' + this.usuario.img;
 		} else {
 			imgUrl = environment.apiUrl + '/upload/usuarios/no-image';
 		}
 		return imgUrl;
+	}
+
+	getToken(): string {
+		return localStorage.getItem('token') || '';
 	}
 }
 
