@@ -2,8 +2,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { Login } from '@auth/models/login';
-import { User } from '@auth/models/user';
+import { UserLogin } from '@auth/models/login';
+import { User, userRegister } from '@auth/models/user';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environment';
 
@@ -24,7 +24,7 @@ export class AuthService {
 		private ngzone: NgZone
 	) {}
 
-	createUser(user: User): Observable<ResponseRequest> {
+	createUser(user: userRegister): Observable<ResponseRequest> {
 		return this.http.post<ResponseRequest>(`${this.baseUrl}/usuarios/create`, user).pipe(
 			tap((response) => {
 				localStorage.setItem('token', response.token);
@@ -40,7 +40,7 @@ export class AuthService {
 		});
 	}
 
-	loginUser(user: Login): Observable<ResponseRequest> {
+	loginUser(user: UserLogin): Observable<ResponseRequest> {
 		return this.http.post<ResponseRequest>(`${this.baseUrl}/auth/login`, user).pipe(
 			tap((response: ResponseRequest) => {
 				localStorage.setItem('token', response?.token);
@@ -57,8 +57,6 @@ export class AuthService {
 	}
 
 	tokenValidation(): Observable<boolean> {
-		// const token = localStorage.getItem('token') || '';
-
 		return this.http
 			.get(`${this.baseUrl}/auth/renew`, {
 				headers: {
@@ -78,6 +76,7 @@ export class AuthService {
 						uid,
 						img
 					};
+
 					localStorage.setItem('token', resp?.token);
 				}),
 				map(() => true),

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component } from '@angular/core';
+import { Component, Type } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '@auth/models/user';
 import { AuthService } from '@auth/service/auth.service';
@@ -15,9 +15,8 @@ export class PerfilUserComponent {
 	user!: User;
 	imgUpload!: boolean;
 	fileImage!: File;
-	imgTemp!: any | null;
+	imgTemp!: string | ArrayBuffer | null | undefined;
 	typeCollectionDB!: string | 'usuarios' | 'medico' | 'hospitales';
-
 	constructor(
 		private fbBuilder: FormBuilder,
 		private authService: AuthService,
@@ -54,6 +53,22 @@ export class PerfilUserComponent {
 		this.previewImg();
 	}
 
+	// /**
+	//  *  Method typed with Event
+	//  * @param event return img url string
+	//  */
+	// onFileSelected22(event: Event): void {
+	// 	const input = event.target as HTMLInputElement;
+	// 	if (input.files && input.files[0]) {
+	// 		const file = input.files[0];
+	// 		const reader = new FileReader();
+	// 		reader.onload = (e): void => {
+	// 			this.imgTemp = e.target?.result;
+	// 		};
+	// 		reader.readAsDataURL(file);
+	// 	}
+	// }
+
 	previewImg(): void {
 		if (this.fileImage) {
 			this.imgTemp = null;
@@ -73,7 +88,7 @@ export class PerfilUserComponent {
 			formData.append('imagen', this.fileImage);
 
 			this.uploaService
-				.updatePhoto(formData, 'usuarios')
+				.updatePhoto(formData, 'usuarios', this.user.uid)
 				.then((img) => {
 					console.log(img, 'values');
 				})

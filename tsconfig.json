@@ -8,7 +8,8 @@
       "@doctors/*": ["src/app/pages/modules/doctors/*"],
       "@shared/*": ["./src/app/shared/*"],
       "@pages/*": ["./src/app/pages/*"],
-      "@hospitals/*": ["src/app/pages/modules/hospitals/*"]
+      "@hospitals/*": ["src/app/pages/modules/hospitals/*"],
+      "@users/*": ["src/app/pages/modules/users/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

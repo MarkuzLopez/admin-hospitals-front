@@ -1,5 +1,5 @@
-export interface Login {
-	username: string;
-	password: string;
+import { userRegister } from '@auth/models/user';
+
+export interface UserLogin extends userRegister {
 	remember?: boolean;
 }

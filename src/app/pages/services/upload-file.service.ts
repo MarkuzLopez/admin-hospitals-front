@@ -8,9 +8,9 @@ import { environment } from 'src/environment';
 export class UploadFileService {
 	private readonly baseUrl = environment.apiUrl;
 	constructor(private authService: AuthService) {}
-	async updatePhoto(formData: FormData, type: string): Promise<string> {
+	async updatePhoto(formData: FormData, type: string, uid: string): Promise<string> {
 		try {
-			const url = `${this.baseUrl}/upload/${type}/${this.authService.usuario.uid}`;
+			const url = `${this.baseUrl}/upload/${type}/${uid}`;
 			const resp = await fetch(url, {
 				method: 'PUT',
 				headers: {

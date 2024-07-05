@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '@auth/models/user';
+import { Router } from '@angular/router';
+import { userRegister } from '@auth/models/user';
 import { AuthService } from '@auth/service/auth.service';
 
 @Component({
@@ -11,11 +12,12 @@ import { AuthService } from '@auth/service/auth.service';
 export class RegisterComponent implements OnInit {
 	registerForm!: FormGroup;
 	formSubmited = false;
-	modelRegisterBD!: User;
+	modelRegisterBD!: userRegister;
 
 	constructor(
 		private formBuilder: FormBuilder,
-		private authService: AuthService
+		private authService: AuthService,
+		private router: Router
 	) {}
 
 	ngOnInit(): void {
@@ -50,7 +52,8 @@ export class RegisterComponent implements OnInit {
 			this.authService.createUser(this.modelRegisterBD).subscribe(
 				(user) => {
 					// TODO pending for alerts msgs
-					console.log(user, 'user creado');
+					alert(`user ${user.usuario?.nombre} creado exitosamente`);
+					this.router.navigateByUrl('/dashboard');
 				},
 				(error) => {
 					// TODO pending for alerts msgs
