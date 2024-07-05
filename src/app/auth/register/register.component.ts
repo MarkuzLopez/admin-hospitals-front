@@ -14,6 +14,8 @@ export class RegisterComponent implements OnInit {
 	formSubmited = false;
 	modelRegisterBD!: userRegister;
 
+	hola = '';
+
 	constructor(
 		private formBuilder: FormBuilder,
 		private authService: AuthService,
