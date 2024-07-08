@@ -40,7 +40,7 @@ export class SidebarComponent {
 		{
 			title: 'Users',
 			icon: 'mdi mdi-gauge',
-			route: '/'
+			route: '/users'
 		}
 	];
 }

@@ -17,6 +17,10 @@ const routes: Routes = [
 				loadChildren: () => import('@pages/modules/doctors/doctors.module').then((m) => m.DoctorsModule)
 			},
 			{
+				path: 'users',
+				loadChildren: () => import('@pages/modules/users/users.module').then((m) => m.UsersModule)
+			},
+			{
 				path: 'profile',
 				component: PerfilUserComponent
 			}

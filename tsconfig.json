@@ -5,11 +5,11 @@
     "baseUrl": "./",
     "paths": {
       "@auth/*": ["./src/app/auth/*"],
-      "@doctors/*": ["src/app/pages/modules/doctors/*"],
       "@shared/*": ["./src/app/shared/*"],
       "@pages/*": ["./src/app/pages/*"],
       "@hospitals/*": ["src/app/pages/modules/hospitals/*"],
-      "@users/*": ["src/app/pages/modules/users/*"]
+      "@users/*": ["src/app/pages/modules/users/*"],
+      "@doctors/*": ["src/app/pages/modules/doctors/*"],
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
