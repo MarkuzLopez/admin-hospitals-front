@@ -8,7 +8,7 @@
 	</div>
 </div>
 
-<div class="row animated fadeIn fast">
+<div class="row animated fadeIn fast" *ngIf="loading">
 	<div class="col-12">
 		<div class="alert alert-info text-center">
 			<h4 class="alert-heading">Cargando</h4>
@@ -37,12 +37,18 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+							<tr *ngFor="let user of users">
 								<td class="text-center">
-									<img src="" alt="Avatar de usuario" class="avatar cursor" />
+									<img
+										*ngIf="!user.google"
+										[src]="img + '/' + user.img"
+										alt="Avatar de usuario"
+										class="avatar cursor"
+									/>
+									<img *ngIf="user.google" [src]="user.img" alt="img google" class="avatar cursor" />
 								</td>
-								<td>testmail.com</td>
-								<td>Markuz</td>
+								<td>{{ user.email }}</td>
+								<td>{{ user.nombre }}</td>
 
 								<td>
 									<select class="form-control">
@@ -52,8 +58,6 @@
 								</td>
 
 								<td>
-									<!-- <span *ngIf="usuario.google" class="label label-danger">Google</span>    
-                                    <span *ngIf="!usuario.google" class="label label-info">Email</span>     -->
 									<span class="label label-info">Email</span>
 								</td>
 
@@ -71,9 +75,9 @@
 				</div>
 
 				<div>
-					<button class="btn btn-secondary">Anteriores</button>
+					<button class="btn btn-secondary" (click)="changePage(-5)" [disabled]="sincePage <= 0">Anteriores</button>
 					&nbsp;
-					<button class="btn btn-secondary">Siguientes</button>
+					<button class="btn btn-secondary" (click)="changePage(+5)">Siguientes</button>
 				</div>
 			</div>
 		</div>

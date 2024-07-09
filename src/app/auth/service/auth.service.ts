@@ -35,7 +35,7 @@ export class AuthService {
 	updateProfile(user: User): Observable<ResponseRequest> {
 		return this.http.put<ResponseRequest>(`${this.baseUrl}/usuarios/update/${this.usuario.uid}`, user, {
 			headers: {
-				'x-token': this.getToken()
+				'x-token': this.token
 			}
 		});
 	}
@@ -60,7 +60,7 @@ export class AuthService {
 		return this.http
 			.get(`${this.baseUrl}/auth/renew`, {
 				headers: {
-					'x-token': this.getToken()
+					'x-token': this.token
 				}
 			})
 			.pipe(
@@ -83,18 +83,6 @@ export class AuthService {
 				catchError(() => of(false))
 			);
 	}
-
-	// uploadImg(): Observable<any> {
-	// 	const formData = new FormData();
-	// 	const imgTemp = localStorage.getItem('imgTemp');
-	// 	formData.append('img', imgTemp!);
-
-	// 	return this.http.post(`${this.baseUrl}/usuarios/actualizar-imagen`, formData, {
-	// 		headers: {
-	// 			'x-token': this.getToken()
-	// 		}
-	// 	});
-	// }
 
 	onLogout(): void {
 		const email = localStorage.getItem('email') || '';
@@ -119,8 +107,17 @@ export class AuthService {
 		return imgUrl;
 	}
 
-	getToken(): string {
+	get token(): string {
 		return localStorage.getItem('token') || '';
+	}
+
+	// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+	get headers() {
+		return {
+			headers: {
+				'x-token': this.token
+			}
+		};
 	}
 }
 
