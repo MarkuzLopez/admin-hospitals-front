@@ -33,11 +33,7 @@ export class AuthService {
 	}
 
 	updateProfile(user: User): Observable<ResponseRequest> {
-		return this.http.put<ResponseRequest>(`${this.baseUrl}/usuarios/update/${this.usuario.uid}`, user, {
-			headers: {
-				'x-token': this.token
-			}
-		});
+		return this.http.put<ResponseRequest>(`${this.baseUrl}/usuarios/update/${this.usuario.uid}`, user, this.headers);
 	}
 
 	loginUser(user: UserLogin): Observable<ResponseRequest> {

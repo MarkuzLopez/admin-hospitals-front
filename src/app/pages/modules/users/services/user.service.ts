@@ -18,11 +18,7 @@ export class UserService {
 	}
 
 	getUsers(value?: number): Observable<ResponseUsers> {
-		return this.http.get<ResponseUsers>(`${this.baseUrl}/usuarios?desde=${value}`, {
-			headers: {
-				'x-token': this.authService.token
-			}
-		});
+		return this.http.get<ResponseUsers>(`${this.baseUrl}/usuarios?desde=${value}`, this.authService.headers);
 	}
 }
 
