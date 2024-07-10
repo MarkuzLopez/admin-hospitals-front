@@ -49,3 +49,7 @@
     width: 100%;
     z-index: 9999;
 }
+
+.modal-content { 
+    width: 45rem !important;
+}

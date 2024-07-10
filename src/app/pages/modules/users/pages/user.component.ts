@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '@auth/models/user';
 import { environment } from 'src/environment';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { ModalFormComponent } from '../components/modal-form/modal-form.component';
 
 @Component({
 	selector: 'app-user',
@@ -14,7 +16,11 @@ export class UserComponent implements OnInit {
 	loading!: boolean;
 	sincePage = 0;
 	img!: string;
-	constructor(private userService: UserService) {}
+	bsModalRef?: BsModalRef;
+	constructor(
+		private userService: UserService,
+		private modalService: BsModalService
+	) {}
 
 	ngOnInit(): void {
 		this.getUsers();
@@ -38,5 +44,33 @@ export class UserComponent implements OnInit {
 			this.sincePage -= value;
 		}
 		this.getUsers();
+	}
+
+	openModalWithComponent(options: { dataUser: User | null; mode: 'edit' | 'create'; title: string }): void {
+		const initialState: ModalOptions = {
+			initialState: {
+				title: options.title,
+				mode: options.mode
+			}
+		};
+		this.bsModalRef = this.modalService.show(ModalFormComponent, initialState);
+		this.bsModalRef?.content.setData(options.dataUser);
+		this.bsModalRef.onHidden?.subscribe(() => this.getUsers());
+	}
+
+	onCreate(): void {
+		this.openModalWithComponent({
+			dataUser: null,
+			mode: 'create',
+			title: 'Crear Usuario'
+		});
+	}
+
+	onEdit(row: User): void {
+		this.openModalWithComponent({
+			dataUser: row,
+			mode: 'edit',
+			title: 'Editar Usuario'
+		});
 	}
 }

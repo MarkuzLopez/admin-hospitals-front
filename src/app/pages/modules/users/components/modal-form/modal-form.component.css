@@ -1,0 +1,27 @@
+/* file-upload.component.css */
+.progress-bar {
+    height: 20px;
+    background-color: #4caf50;
+    width: 0;
+    transition: width 0.4s ease;
+  }
+  
+  .progress-text {
+    margin-top: 5px;
+  }
+  
+  button {
+    margin-right: 10px;
+    padding: 10px;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    background-color: #cccccc;
+  }
+  
+  .modal-width{
+    width: 45rem !important;
+  }
