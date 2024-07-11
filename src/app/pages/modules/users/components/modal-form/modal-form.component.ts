@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from '@auth/models/user';
+import { AuthService } from '@auth/service/auth.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -13,13 +16,26 @@ export class ModalFormComponent implements OnInit {
 	title?: string;
 	closeBtnName?: string;
 	list: string[] = [];
+	formUser!: FormGroup<modalFormUser>;
 
-	constructor(public bsModalRef: BsModalRef) {
+	constructor(
+		public bsModalRef: BsModalRef,
+		private formBuilder: FormBuilder,
+		private authService: AuthService
+	) {
 		console.log('entraaa componen modal form');
 	}
 
 	ngOnInit(): void {
-		console.log('enyra');
+		this.formUser = this.initForm();
+	}
+
+	private initForm(): FormGroup {
+		return this.formBuilder.group<modalFormUser>({
+			uid: new FormControl('', { nonNullable: true }),
+			nombre: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+			email: new FormControl('', { nonNullable: true, validators: [Validators.required] })
+		});
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -31,10 +47,26 @@ export class ModalFormComponent implements OnInit {
 		}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	setData(post: any): void {
-		console.log(post, 'sadas');
-		// this.postForm.patchValue(post);
-		// console.log(this.postForm.value, 'forms post');
+	setData(user: User): void {
+		this.formUser.patchValue(user);
 	}
+
+	updateUser(): void {
+		const userUpdate = {
+			uid: this.formUser.value.uid || '',
+			nombre: this.formUser.value.nombre || '',
+			email: this.formUser.value.email || ''
+		};
+		this.authService.updateProfile(userUpdate).subscribe(() => {
+			// TODO pending msj alert
+			alert('usario actualizado');
+			this.bsModalRef.hide();
+		});
+	}
+}
+
+export interface modalFormUser {
+	nombre?: FormControl<string>;
+	email?: FormControl<string>;
+	uid?: FormControl<string>;
 }

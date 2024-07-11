@@ -32,8 +32,9 @@ export class AuthService {
 		);
 	}
 
-	updateProfile(user: User): Observable<ResponseRequest> {
-		return this.http.put<ResponseRequest>(`${this.baseUrl}/usuarios/update/${this.usuario.uid}`, user, this.headers);
+	updateProfile(userUpdate: { nombre: string; email: string; uid: string }): Observable<ResponseRequest> {
+		const uid = userUpdate.uid;
+		return this.http.put<ResponseRequest>(`${this.baseUrl}/usuarios/update/${uid}`, userUpdate, this.headers);
 	}
 
 	loginUser(user: UserLogin): Observable<ResponseRequest> {

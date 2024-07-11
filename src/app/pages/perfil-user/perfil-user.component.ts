@@ -28,6 +28,7 @@ export class PerfilUserComponent {
 
 	private initForm(): void {
 		this.formProfile = this.fbBuilder.group({
+			uid: [this.user.uid],
 			nombre: [this.user.nombre, Validators.required],
 			email: [this.user.email, [Validators.required, Validators.email]]
 		});

@@ -17,7 +17,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 		SidebarComponent,
 		DashboardComponent,
 		ReactiveFormsModule,
-		HttpClientModule
+		HttpClientModule,
+		CommonModule,
+		RouterModule
 	]
 })
 export class SharedModule {}

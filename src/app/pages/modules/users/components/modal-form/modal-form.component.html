@@ -9,10 +9,10 @@
 		<div class="col-md-6">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">Mi perfil de usuario</h4>
+					<h4 class="card-title">Perfil de usuario</h4>
 					<h6 class="card-subtitle">Ajustes</h6>
 
-					<form class="form p-t-20">
+					<form class="form p-t-20" [formGroup]="formUser" (ngSubmit)="updateUser()">
 						<div class="form-group">
 							<label for="exampleInputuname">User Name</label>
 							<div class="input-group">
@@ -75,5 +75,5 @@
 	</div>
 </div>
 <div class="modal-footer">
-	<button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">{{ closeBtnName }}</button>
+	<button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">Cerrar</button>
 </div>
