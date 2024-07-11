@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '@auth/models/user';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { UserService } from '../../services/user.service';
+import { UserService, userUpdate } from '../../services/user.service';
 import { UploadFileService } from '@pages/services/upload-file.service';
 
 @Component({
@@ -42,12 +42,8 @@ export class ModalFormComponent implements OnInit {
 	}
 
 	updateUser(): void {
-		const userUpdate = {
-			uid: this.formUser.value.uid || '',
-			nombre: this.formUser.value.nombre || '',
-			email: this.formUser.value.email || ''
-		};
-		this.userService.updateProfile(userUpdate).subscribe(() => {
+		const userData = this.formUser.value as userUpdate;
+		this.userService.updateProfile(userData).subscribe(() => {
 			// TODO pending msj alert
 			alert('usario actualizado');
 			this.bsModalRef.hide();

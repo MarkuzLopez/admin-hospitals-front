@@ -30,7 +30,7 @@ export class UserService {
 		);
 	}
 
-	updateProfile(userUpdate: { nombre: string; email: string; uid: string }): Observable<ResponseRequest> {
+	updateProfile(userUpdate: userUpdate): Observable<ResponseRequest> {
 		const uid = userUpdate.uid;
 		const headersRequest = this.authService.headers;
 		return this.http.put<ResponseRequest>(`${this.baseUrl}/usuarios/update/${uid}`, userUpdate, headersRequest);
@@ -45,4 +45,8 @@ export interface ResponseUsers {
 	ok: string;
 	total: number;
 	usuarios: User[];
+}
+
+export interface userUpdate extends userRegister {
+	uid: string;
 }
