@@ -24,18 +24,18 @@ export class AuthService {
 		private ngzone: NgZone
 	) {}
 
-	createUser(user: userRegister): Observable<ResponseRequest> {
-		return this.http.post<ResponseRequest>(`${this.baseUrl}/usuarios/create`, user).pipe(
-			tap((response) => {
-				localStorage.setItem('token', response.token);
-			})
-		);
-	}
+	// createUser(user: userRegister): Observable<ResponseRequest> {
+	// 	return this.http.post<ResponseRequest>(`${this.baseUrl}/usuarios/create`, user).pipe(
+	// 		tap((response) => {
+	// 			localStorage.setItem('token', response.token);
+	// 		})
+	// 	);
+	// }
 
-	updateProfile(userUpdate: { nombre: string; email: string; uid: string }): Observable<ResponseRequest> {
-		const uid = userUpdate.uid;
-		return this.http.put<ResponseRequest>(`${this.baseUrl}/usuarios/update/${uid}`, userUpdate, this.headers);
-	}
+	// updateProfile(userUpdate: { nombre: string; email: string; uid: string }): Observable<ResponseRequest> {
+	// 	const uid = userUpdate.uid;
+	// 	return this.http.put<ResponseRequest>(`${this.baseUrl}/usuarios/update/${uid}`, userUpdate, this.headers);
+	// }
 
 	loginUser(user: UserLogin): Observable<ResponseRequest> {
 		return this.http.post<ResponseRequest>(`${this.baseUrl}/auth/login`, user).pipe(

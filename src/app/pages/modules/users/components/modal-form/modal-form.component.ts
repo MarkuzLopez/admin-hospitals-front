@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { User } from '@auth/models/user';
 import { AuthService } from '@auth/service/auth.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { UserService } from '../../services/user.service';
 
 @Component({
 	selector: 'app-modal-form',
@@ -21,7 +22,7 @@ export class ModalFormComponent implements OnInit {
 	constructor(
 		public bsModalRef: BsModalRef,
 		private formBuilder: FormBuilder,
-		private authService: AuthService
+		private userService: UserService
 	) {
 		console.log('entraaa componen modal form');
 	}
@@ -57,7 +58,7 @@ export class ModalFormComponent implements OnInit {
 			nombre: this.formUser.value.nombre || '',
 			email: this.formUser.value.email || ''
 		};
-		this.authService.updateProfile(userUpdate).subscribe(() => {
+		this.userService.updateProfile(userUpdate).subscribe(() => {
 			// TODO pending msj alert
 			alert('usario actualizado');
 			this.bsModalRef.hide();

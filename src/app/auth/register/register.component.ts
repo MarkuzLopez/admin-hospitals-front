@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { userRegister } from '@auth/models/user';
 import { AuthService } from '@auth/service/auth.service';
+import { UserService } from '@pages/modules/users/services/user.service';
 
 @Component({
 	selector: 'app-register',
@@ -19,7 +20,8 @@ export class RegisterComponent implements OnInit {
 	constructor(
 		private formBuilder: FormBuilder,
 		private authService: AuthService,
-		private router: Router
+		private router: Router,
+		private userService: UserService
 	) {}
 
 	ngOnInit(): void {
@@ -51,7 +53,7 @@ export class RegisterComponent implements OnInit {
 				password: this.registerForm.get('password')?.value
 			};
 
-			this.authService.createUser(this.modelRegisterBD).subscribe(
+			this.userService.createUser(this.modelRegisterBD).subscribe(
 				(user) => {
 					// TODO pending for alerts msgs
 					alert(`user ${user.usuario?.nombre} creado exitosamente`);

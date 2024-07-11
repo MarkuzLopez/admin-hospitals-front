@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '@auth/models/user';
 import { AuthService } from '@auth/service/auth.service';
+import { UserService } from '@pages/modules/users/services/user.service';
 import { UploadFileService } from '@pages/services/upload-file.service';
 
 @Component({
@@ -20,7 +21,8 @@ export class PerfilUserComponent {
 	constructor(
 		private fbBuilder: FormBuilder,
 		private authService: AuthService,
-		private uploaService: UploadFileService
+		private uploaService: UploadFileService,
+		private userService: UserService
 	) {
 		this.user = this.authService.usuario;
 		this.initForm();
@@ -36,7 +38,7 @@ export class PerfilUserComponent {
 
 	updateUser(): void {
 		if (this.formProfile.valid) {
-			this.authService.updateProfile(this.formProfile.value).subscribe({
+			this.userService.updateProfile(this.formProfile.value).subscribe({
 				next: (res) => {
 					alert(`Usuario ${res.usuario?.nombre}  actualizado`);
 					this.user.email = res.usuario?.email || '';
