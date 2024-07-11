@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '@auth/service/auth.service';
 import { environment } from 'src/environment';
 
 @Injectable({
@@ -7,7 +6,6 @@ import { environment } from 'src/environment';
 })
 export class UploadFileService {
 	private readonly baseUrl = environment.apiUrl;
-	constructor(private authService: AuthService) {}
 	async updatePhoto(formData: FormData, type: string, uid: string): Promise<string> {
 		try {
 			const url = `${this.baseUrl}/upload/${type}/${uid}`;
@@ -22,7 +20,6 @@ export class UploadFileService {
 			const data = await resp.json();
 
 			if (data.ok) {
-				console.log(data);
 				return data.nombreArchivo;
 			} else {
 				return 'Hubo un error, hable con admin';

@@ -21,7 +21,7 @@ export class PerfilUserComponent {
 	constructor(
 		private fbBuilder: FormBuilder,
 		private authService: AuthService,
-		private uploaService: UploadFileService,
+		private uploapService: UploadFileService,
 		private userService: UserService
 	) {
 		this.user = this.authService.usuario;
@@ -90,7 +90,7 @@ export class PerfilUserComponent {
 			const formData = new FormData();
 			formData.append('imagen', this.fileImage);
 
-			this.uploaService
+			this.uploapService
 				.updatePhoto(formData, 'usuarios', this.user.uid)
 				.then((img) => {
 					console.log(img, 'values');
