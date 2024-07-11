@@ -74,7 +74,13 @@
 									</a>
 								</td>
 								<td class="text-nowrap text-center">
-									<a data-toggle="tooltip" data-original-title="Borrar" class="cursor">
+									<a
+										href="javascript:void(0)"
+										data-toggle="tooltip"
+										(click)="onDelete(user.uid)"
+										data-original-title="Borrar"
+										class="cursor"
+									>
 										<i class="fa fa-close text-danger"></i>
 									</a>
 								</td>

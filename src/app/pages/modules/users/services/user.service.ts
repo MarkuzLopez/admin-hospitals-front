@@ -35,6 +35,10 @@ export class UserService {
 		const headersRequest = this.authService.headers;
 		return this.http.put<ResponseRequest>(`${this.baseUrl}/usuarios/update/${uid}`, userUpdate, headersRequest);
 	}
+
+	deleteUser(uid: string): Observable<unknown> {
+		return this.http.delete(`${this.baseUrl}/usuarios/delete/${uid}`, this.authService.headers);
+	}
 }
 
 export interface ResponseUsers {

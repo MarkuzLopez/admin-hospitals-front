@@ -73,4 +73,14 @@ export class UserComponent implements OnInit {
 			title: 'Editar Usuario'
 		});
 	}
+
+	onDelete(uid: string): void {
+		const response = confirm('Desea eliminar este usuario ');
+		if (response) {
+			this.userService.deleteUser(uid).subscribe((res) => {
+				console.log(res, 'usaario eliminado');
+				this.getUsers();
+			});
+		}
+	}
 }
