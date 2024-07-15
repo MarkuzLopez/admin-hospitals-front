@@ -12,6 +12,7 @@ import { ModalFormComponent } from '../components/modal-form/modal-form.componen
 })
 export class UserComponent implements OnInit {
 	users!: User[];
+	usersTemp!: User[];
 	total!: number;
 	loading!: boolean;
 	sincePage = 0;
@@ -32,7 +33,29 @@ export class UserComponent implements OnInit {
 		this.userService.getUsers(this.sincePage).subscribe((responseUser) => {
 			this.users = responseUser.usuarios;
 			this.total = responseUser.total;
+			this.usersTemp = responseUser.usuarios;
 			this.loading = false;
+		});
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onSearch(event: any): void {
+		const term = event.target.value;
+		if (!term.trim()) {
+			this.users = this.usersTemp;
+			return;
+		}
+		this.searchUsers(term);
+	}
+
+	searchUsers(term: string): void {
+		this.userService.searchUsers(term).subscribe({
+			next: (res) => {
+				this.users = res.resultado;
+			},
+			error: (err) => {
+				console.log(err, 'erro');
+			}
 		});
 	}
 

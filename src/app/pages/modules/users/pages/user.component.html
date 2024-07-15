@@ -2,7 +2,13 @@
 	<div class="col-12">
 		<div class="card">
 			<div class="card-body">
-				<input type="text" class="form-control" placeholder="Buscar usuario..." #txtTermino />
+				<input
+					type="text"
+					class="form-control"
+					(input)="onSearch($event)"
+					placeholder="Buscar usuario..."
+					#txtTermino
+				/>
 			</div>
 		</div>
 	</div>

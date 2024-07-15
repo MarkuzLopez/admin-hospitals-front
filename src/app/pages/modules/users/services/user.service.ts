@@ -39,6 +39,15 @@ export class UserService {
 	deleteUser(uid: string): Observable<unknown> {
 		return this.http.delete(`${this.baseUrl}/usuarios/delete/${uid}`, this.authService.headers);
 	}
+
+	searchUsers(word: string): Observable<ResponseSearch> {
+		return this.http.get<ResponseSearch>(`${this.baseUrl}/todo/collection/usuarios/${word}`, this.authService.headers);
+	}
+}
+
+export interface ResponseSearch {
+	ok: boolean;
+	resultado: User[];
 }
 
 export interface ResponseUsers {
