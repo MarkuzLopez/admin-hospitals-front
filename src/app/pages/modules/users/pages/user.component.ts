@@ -4,6 +4,7 @@ import { User } from '@auth/models/user';
 import { environment } from 'src/environment';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ModalFormComponent } from '../components/modal-form/modal-form.component';
+import { AuthService } from '@auth/service/auth.service';
 
 @Component({
 	selector: 'app-user',
@@ -20,7 +21,8 @@ export class UserComponent implements OnInit {
 	bsModalRef?: BsModalRef;
 	constructor(
 		private userService: UserService,
-		private modalService: BsModalService
+		private modalService: BsModalService,
+		private authService: AuthService
 	) {}
 
 	ngOnInit(): void {
@@ -101,9 +103,14 @@ export class UserComponent implements OnInit {
 		const response = confirm('Desea eliminar este usuario ');
 		if (response) {
 			this.userService.deleteUser(uid).subscribe((res) => {
+				//todo alert pedding
 				console.log(res, 'usaario eliminado');
 				this.getUsers();
 			});
 		}
+	}
+
+	veryUserAuth(uid: string): void {
+		this.authService.usuario.uid === uid ? alert('no se puede eliminar asi mismo.') : this.onDelete(uid);
 	}
 }
