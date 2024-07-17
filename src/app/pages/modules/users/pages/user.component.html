@@ -58,14 +58,15 @@
 								<td>{{ user.nombre }}</td>
 
 								<td>
-									<select class="form-control">
+									<select class="form-control" [(ngModel)]="user.role" (change)="updateProfile(user)">
 										<option value="ADMIN_ROLE">Admin</option>
 										<option value="USER_ROLE">User</option>
 									</select>
 								</td>
 
 								<td>
-									<span class="label label-info">Email</span>
+									<span *ngIf="user.google" class="label label-danger">Google</span>
+									<span *ngIf="!user.google" class="label label-info">Email</span>
 								</td>
 
 								<td class="text-nowrap text-center">

@@ -58,4 +58,5 @@ export interface ResponseUsers {
 
 export interface userUpdate extends userRegister {
 	uid: string;
+	role?: string;
 }

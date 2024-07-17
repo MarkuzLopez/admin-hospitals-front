@@ -6,11 +6,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [BreadcumbsComponent, HeaderComponent, SidebarComponent, DashboardComponent],
-	imports: [CommonModule, RouterModule, ReactiveFormsModule, HttpClientModule],
+	imports: [CommonModule, RouterModule, ReactiveFormsModule, HttpClientModule, FormsModule],
 	exports: [
 		BreadcumbsComponent,
 		HeaderComponent,
@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 		DashboardComponent,
 		ReactiveFormsModule,
 		HttpClientModule,
+		FormsModule,
 		CommonModule,
 		RouterModule
 	]

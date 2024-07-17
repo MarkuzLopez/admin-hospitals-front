@@ -19,6 +19,7 @@ export class UserComponent implements OnInit {
 	sincePage = 0;
 	img!: string;
 	bsModalRef?: BsModalRef;
+	role!: string;
 	constructor(
 		private userService: UserService,
 		private modalService: BsModalService,
@@ -112,5 +113,9 @@ export class UserComponent implements OnInit {
 
 	veryUserAuth(uid: string): void {
 		this.authService.usuario.uid === uid ? alert('no se puede eliminar asi mismo.') : this.onDelete(uid);
+	}
+
+	updateProfile(user: User): void {
+		this.userService.updateProfile(user).subscribe(() => this.getUsers());
 	}
 }
