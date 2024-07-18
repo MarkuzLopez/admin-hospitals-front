@@ -6,7 +6,7 @@ import { AuthService } from '@auth/service/auth.service';
 })
 export class IdleService {
 	private idleTimeout: any;
-	private readonly idleTimeLimit = 300000; // cinco minutos
+	private readonly idleTimeLimit = 800000; // cinco minutos
 
 	constructor(
 		private ngZone: NgZone,
