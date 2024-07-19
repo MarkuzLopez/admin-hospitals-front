@@ -8,10 +8,11 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImagenPipe } from './pipes/imagen.pipe';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
 	declarations: [BreadcumbsComponent, HeaderComponent, SidebarComponent, DashboardComponent, ImagenPipe],
-	imports: [CommonModule, RouterModule, ReactiveFormsModule, HttpClientModule, FormsModule],
+	imports: [CommonModule, RouterModule, ReactiveFormsModule, HttpClientModule, FormsModule, ModalModule.forRoot()],
 	exports: [
 		BreadcumbsComponent,
 		HeaderComponent,
@@ -22,7 +23,8 @@ import { ImagenPipe } from './pipes/imagen.pipe';
 		HttpClientModule,
 		FormsModule,
 		CommonModule,
-		RouterModule
+		RouterModule,
+		ModalModule
 	]
 })
 export class SharedModule {}

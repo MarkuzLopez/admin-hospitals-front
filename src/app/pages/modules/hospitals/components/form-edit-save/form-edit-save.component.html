@@ -1,0 +1,71 @@
+<div class="modal-header">
+	<h4 class="modal-title pull-left">{{ title }}</h4>
+	<button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+		<span aria-hidden="true" class="visually-hidden">&times;</span>
+	</button>
+</div>
+
+<div class="modal-body">
+	<div class="row col-12">
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Modal hospital</h4>
+					<h6 class="card-subtitle">Ajustes</h6>
+
+					<form class="form p-t-20" [formGroup]="formHospital" (ngSubmit)="doAction()">
+						<div class="form-group">
+							<label for="exampleInputuname"> Nombre Hospital</label>
+							<div class="input-group">
+								<div class="input-group-addon"><i class="ti-user"></i></div>
+								<input
+									type="text"
+									class="form-control"
+									id="exampleInputuname"
+									placeholder="Nombre del usuario"
+									formControlName="nombre"
+								/>
+							</div>
+						</div>
+
+						<button type="submit" class="btn btn-success btn-block waves-effect waves-light m-r-10">
+							<i class="fa fa-save"></i>
+							Guardar cambios
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Avatar</h4>
+					<h6 class="card-subtitle">Imagen de Hospital</h6>
+
+					<div class="text-center">
+						<img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar" style="width: 10rem; height: 8rem" alt="preview" />
+					</div>
+
+					<input type="file" (change)="onFileSelected($event)" accept="image/*" #fileInput hidden />
+					<button type="button" class="btn btn-primary" (click)="fileInput.click()">Selecionar Foto</button>
+
+					<br />
+					<br />
+
+					<button
+						type="button"
+						(click)="uploadImagen()"
+						class="btn btn-success btn-block waves-effect waves-light m-r-10"
+					>
+						<i class="fa fa-save"></i>
+						Actualiar Foto
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">Cerrar</button>
+</div>

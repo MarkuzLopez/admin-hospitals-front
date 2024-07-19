@@ -5,6 +5,7 @@ import { AuthService } from '@auth/service/auth.service';
 	providedIn: 'root'
 })
 export class IdleService {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	private idleTimeout: any;
 	private readonly idleTimeLimit = 800000; // cinco minutos
 
