@@ -19,13 +19,15 @@ export class FormEditSaveComponent {
 		public bsModalRef: BsModalRef
 	) {
 		this.formHospital = this.fbBldr.group({
+			_id: [''],
 			nombre: ['', Validators.required]
 		});
 	}
 
 	setData(hospital: Hospital): void {
 		this.formHospital.patchValue({
-			nombre: hospital?.nombre
+			nombre: hospital?.nombre,
+			_id: hospital?._id
 		});
 	}
 
@@ -38,14 +40,20 @@ export class FormEditSaveComponent {
 	}
 
 	createHospital(): void {
-		this.hospitalService.createHospitals(this.formHospital.value).subscribe(() => {
+		this.hospitalService.createHospital(this.formHospital.value).subscribe(() => {
+			// todo alerts
 			console.log('hospital creado correctamente');
 			this.bsModalRef.hide();
 		});
 	}
 
 	updateHospital(): void {
-		console.log('update hospitals');
+		if (this.formHospital.valid) {
+			this.hospitalService.updateHospital(this.formHospital.value).subscribe(() => {
+				//TODOD alerts
+				alert('hospital actualizado correctamente');
+			});
+		}
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

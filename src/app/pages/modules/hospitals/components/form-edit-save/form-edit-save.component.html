@@ -28,7 +28,15 @@
 							</div>
 						</div>
 
-						<button type="submit" class="btn btn-success btn-block waves-effect waves-light m-r-10">
+						<button
+							type="submit"
+							[disabled]="formHospital.invalid"
+							[ngClass]="
+								formHospital.invalid
+									? 'btn btn-light btn-block waves-effect waves-light m-r-10 cursor-blocked'
+									: 'btn btn-success btn-block waves-effect waves-light m-r-10'
+							"
+						>
 							<i class="fa fa-save"></i>
 							Guardar cambios
 						</button>

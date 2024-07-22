@@ -18,8 +18,12 @@ export class HospitalsService {
 		return this.http.get<ResponseHospitals>(`${this.baseUrl}/hospitales`);
 	}
 
-	createHospitals(data: { nombre: string }): Observable<ResponseCreate> {
+	createHospital(data = {}): Observable<ResponseCreate> {
 		return this.http.post<ResponseCreate>(`${this.baseUrl}/hospitales/create`, data, this.authService.headers);
+	}
+
+	updateHospital(data: { _id: string; nombre: string }): Observable<unknown> {
+		return this.http.put(`${this.baseUrl}/hospitales/update/${data._id}`, data, this.authService.headers);
 	}
 }
 
