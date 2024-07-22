@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@auth/service/auth.service';
 import { Observable } from 'rxjs';
+import { searchCollection } from 'src/app/models/searchCollection';
 import { environment } from 'src/environment';
 
 @Injectable({
@@ -32,6 +33,13 @@ export class HospitalsService {
 
 	deleteHospital(id: string): Observable<unknown> {
 		return this.http.delete(`${this.baseUrl}/hospitales/delete/${id}`, this.authService.headers);
+	}
+
+	search(word: string): Observable<searchCollection<Hospital>> {
+		return this.http.get<searchCollection<Hospital>>(
+			`${this.baseUrl}/todo/collection/hospitales/${word}`,
+			this.authService.headers
+		);
 	}
 }
 

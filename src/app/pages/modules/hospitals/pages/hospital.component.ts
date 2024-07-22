@@ -12,6 +12,7 @@ import { FormEditSaveComponent } from '../components/form-edit-save/form-edit-sa
 export class HospitalComponent {
 	loading!: boolean;
 	hospitals: Hospital[] = [];
+	hospitalTemp!: Hospital[];
 	imgView!: string;
 	bsModalRef?: BsModalRef;
 	constructor(
@@ -66,5 +67,26 @@ export class HospitalComponent {
 				this.getHospitals();
 			});
 		}
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onSearch(event: any): void {
+		const term = event.target.value;
+		if (!term.trim()) {
+			this.hospitals = this.hospitalTemp;
+			return;
+		}
+		this.searchHospital(term);
+	}
+
+	searchHospital(term: string): void {
+		this.hospitalsService.search(term).subscribe({
+			next: (res) => {
+				this.hospitals = res.resultado;
+			},
+			error: (err) => {
+				console.log(err, 'erro');
+			}
+		});
 	}
 }

@@ -3,7 +3,13 @@
 	<div class="col-12">
 		<div class="card">
 			<div class="card-body">
-				<input type="text" class="form-control" placeholder="Buscar Hospital..." #txtTermino />
+				<input
+					type="text"
+					class="form-control"
+					(input)="onSearch($event)"
+					placeholder="Buscar Hospital..."
+					#txtTermino
+				/>
 			</div>
 		</div>
 	</div>

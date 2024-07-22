@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User, userRegister } from '@auth/models/user';
 import { AuthService, ResponseRequest } from '@auth/service/auth.service';
 import { Observable, tap } from 'rxjs';
+import { searchCollection } from 'src/app/models/searchCollection';
 import { environment } from 'src/environment';
 
 @Injectable({
@@ -40,14 +41,12 @@ export class UserService {
 		return this.http.delete(`${this.baseUrl}/usuarios/delete/${uid}`, this.authService.headers);
 	}
 
-	searchUsers(word: string): Observable<ResponseSearch> {
-		return this.http.get<ResponseSearch>(`${this.baseUrl}/todo/collection/usuarios/${word}`, this.authService.headers);
+	searchUsers(word: string): Observable<searchCollection<User>> {
+		return this.http.get<searchCollection<User>>(
+			`${this.baseUrl}/todo/collection/usuarios/${word}`,
+			this.authService.headers
+		);
 	}
-}
-
-export interface ResponseSearch {
-	ok: boolean;
-	resultado: User[];
 }
 
 export interface ResponseUsers {
