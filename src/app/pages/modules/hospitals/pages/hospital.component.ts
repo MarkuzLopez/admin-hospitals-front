@@ -18,7 +18,6 @@ export class HospitalComponent {
 		private hospitalsService: HospitalsService,
 		private modalService: BsModalService
 	) {
-		console.log('si entraaa aqui');
 		this.imgView = environment.apiUrl + '/upload/hospitals';
 		this.getHospitals();
 	}
@@ -57,5 +56,15 @@ export class HospitalComponent {
 			mode: 'edit',
 			title: 'Editar Hospital'
 		});
+	}
+
+	onDelete(id: string): void {
+		const toCorroborate = confirm('¿Esta seguro de  eliminar hospital?');
+		if (toCorroborate) {
+			this.hospitalsService.deleteHospital(id).subscribe(() => {
+				alert('hospital eliminado correctamente');
+				this.getHospitals();
+			});
+		}
 	}
 }

@@ -18,12 +18,20 @@ export class HospitalsService {
 		return this.http.get<ResponseHospitals>(`${this.baseUrl}/hospitales`);
 	}
 
-	createHospital(data = {}): Observable<ResponseCreate> {
-		return this.http.post<ResponseCreate>(`${this.baseUrl}/hospitales/create`, data, this.authService.headers);
+	createHospital(data = {}): Observable<ResponseService> {
+		return this.http.post<ResponseService>(`${this.baseUrl}/hospitales/create`, data, this.authService.headers);
 	}
 
-	updateHospital(data: { _id: string; nombre: string }): Observable<unknown> {
-		return this.http.put(`${this.baseUrl}/hospitales/update/${data._id}`, data, this.authService.headers);
+	updateHospital(data: { _id: string; nombre: string }): Observable<ResponseService> {
+		return this.http.put<ResponseService>(
+			`${this.baseUrl}/hospitales/update/${data._id}`,
+			data,
+			this.authService.headers
+		);
+	}
+
+	deleteHospital(id: string): Observable<unknown> {
+		return this.http.delete(`${this.baseUrl}/hospitales/delete/${id}`, this.authService.headers);
 	}
 }
 
@@ -39,7 +47,7 @@ export interface Hospital {
 	usuario: unknown;
 }
 
-export interface ResponseCreate {
+export interface ResponseService {
 	ok: boolean;
 	hospital: Hospital;
 }

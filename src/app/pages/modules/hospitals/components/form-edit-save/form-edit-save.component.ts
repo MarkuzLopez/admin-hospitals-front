@@ -49,9 +49,10 @@ export class FormEditSaveComponent {
 
 	updateHospital(): void {
 		if (this.formHospital.valid) {
-			this.hospitalService.updateHospital(this.formHospital.value).subscribe(() => {
+			this.hospitalService.updateHospital(this.formHospital.value).subscribe(({ hospital }) => {
 				//TODOD alerts
-				alert('hospital actualizado correctamente');
+				alert(`El hospital ${hospital.nombre} se actualizo correctamente`);
+				this.bsModalRef.hide();
 			});
 		}
 	}
