@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DoctorsService, MedicoDB } from '../services/doctors.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-doctor',
@@ -9,7 +10,11 @@ import { DoctorsService, MedicoDB } from '../services/doctors.service';
 export class DoctorComponent {
 	loading!: boolean;
 	doctors!: MedicoDB[];
-	constructor(private doctorsService: DoctorsService) {
+	action!: 'edit' | 'create';
+	constructor(
+		private doctorsService: DoctorsService,
+		private router: Router
+	) {
 		this.getDoctors();
 	}
 
@@ -30,10 +35,12 @@ export class DoctorComponent {
 	// todo pending
 	onCreate(): void {
 		console.log('Create');
+		this.router.navigate(['/doctors/save']);
 	}
 	// todo pending
-	onEdit(item: unknown): void {
-		console.log('Edit');
+	onEdit(item: any): void {
+		console.log('Edit', item);
+		this.router.navigate(['/doctors/edit', item?._id]);
 	}
 	// todo pending
 	onDelete(id: string): void {

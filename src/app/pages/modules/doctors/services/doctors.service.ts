@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthService } from '@auth/service/auth.service';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environment';
 
@@ -9,12 +10,21 @@ import { environment } from 'src/environment';
 export class DoctorsService {
 	private readonly baseUrl!: string;
 
-	constructor(private http: HttpClient) {
+	constructor(
+		private http: HttpClient,
+		private authService: AuthService
+	) {
 		this.baseUrl = environment.apiUrl;
 	}
 
 	getDoctors(): Observable<Doctors> {
 		return this.http.get<Doctors>(`${this.baseUrl}/medicos`);
+	}
+	getDoctorById(id: string): Observable<any> {
+		return this.http.get(`${this.baseUrl}/medicos/byId/${id}`);
+	}
+	updateDoctor(nombre: string, id: string): Observable<any> {
+		return this.http.put(`${this.baseUrl}/medicos/update/${id}`, { nombre }, this.authService.headers);
 	}
 }
 

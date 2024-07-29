@@ -1,1 +1,82 @@
-<p>form-edit-save works!</p>
+<div class="row">
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-body">
+				<h6 class="card-subtitle">{{ title }} Usuario</h6>
+
+				<form class="form p-t-20" [formGroup]="formDoctor" (ngSubmit)="onAction()">
+					<div class="form-group">
+						<label for="exampleInputuname">User Name</label>
+						<div class="input-group">
+							<div class="input-group-addon"><i class="ti-user"></i></div>
+							<input
+								type="text"
+								class="form-control"
+								id="exampleInputuname"
+								placeholder="Nombre del medico"
+								formControlName="nameDoctor"
+							/>
+						</div>
+					</div>
+					<div class="form-group" *ngIf="title === 'Actualizar'">
+						<label for="exampleInputEmail1">Usuario quien lo creo</label>
+						<div class="input-group">
+							<div class="input-group-addon"><i class="ti-user"></i></div>
+							<input
+								type="email"
+								class="form-control"
+								id="exampleInputEmail1"
+								placeholder="Usuario"
+								formControlName="nameUser"
+								readonly
+							/>
+						</div>
+					</div>
+
+					<div class="form-group" *ngIf="title === 'Actualizar'">
+						<label for="exampleInputEmail1">Hospital al que pertenece: </label>
+						<div class="input-group">
+							<div class="input-group-addon"><i class="ti-user"></i></div>
+							<input
+								type="text"
+								class="form-control"
+								id="exampleInputEmail1"
+								placeholder="hospital"
+								formControlName="nameHospital"
+								readonly
+							/>
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-success btn-block waves-effect waves-light m-r-10">
+						<i class="fa fa-save"></i>
+						{{ title }} cambios
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Avatar</h4>
+				<h6 class="card-subtitle">Imagen del usuario</h6>
+
+				<div class="text-center">
+					<!-- <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar" style="width: 10rem; height: 8rem" alt="preview" /> -->
+				</div>
+
+				<input type="file" #fileInput accept="image/*" />
+
+				<br />
+				<br />
+
+				<button type="button" class="btn btn-success btn-block waves-effect waves-light m-r-10">
+					<i class="fa fa-save"></i>
+					Cambiar imagen
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
