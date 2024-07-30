@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@auth/service/auth.service';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environment';
 
 @Injectable({
@@ -17,20 +17,31 @@ export class DoctorsService {
 		this.baseUrl = environment.apiUrl;
 	}
 
-	getDoctors(): Observable<Doctors> {
-		return this.http.get<Doctors>(`${this.baseUrl}/medicos`);
+	getDoctors(): Observable<Doctors<MedicoDB[]>> {
+		return this.http.get<Doctors<MedicoDB[]>>(`${this.baseUrl}/medicos`);
 	}
-	getDoctorById(id: string): Observable<any> {
-		return this.http.get(`${this.baseUrl}/medicos/byId/${id}`);
+	getDoctorById(id: string): Observable<Doctors<MedicoDB>> {
+		return this.http.get<Doctors<MedicoDB>>(`${this.baseUrl}/medicos/byId/${id}`);
 	}
-	updateDoctor(nombre: string, id: string): Observable<any> {
-		return this.http.put(`${this.baseUrl}/medicos/update/${id}`, { nombre }, this.authService.headers);
+	updateDoctor(nombre: string, id: string): Observable<Doctors<MedicoDB>> {
+		return this.http.put<Doctors<MedicoDB>>(
+			`${this.baseUrl}/medicos/update/${id}`,
+			{ nombre },
+			this.authService.headers
+		);
+	}
+	saveDoctor(nombre: string, hospital: string): Observable<Doctors<MedicoDB>> {
+		return this.http.post<Doctors<MedicoDB>>(
+			`${this.baseUrl}/medicos/create`,
+			{ nombre, hospital },
+			this.authService.headers
+		);
 	}
 }
 
-export interface Doctors {
+export interface Doctors<T> {
 	ok: boolean;
-	medicoDB: MedicoDB[];
+	medicoDB: T;
 }
 
 export interface MedicoDB {

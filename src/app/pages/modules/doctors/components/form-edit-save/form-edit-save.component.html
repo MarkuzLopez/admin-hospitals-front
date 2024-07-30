@@ -1,8 +1,8 @@
-<div class="row">
+<div class="row" *ngIf="!loading">
 	<div class="col-md-6">
 		<div class="card">
 			<div class="card-body">
-				<h6 class="card-subtitle">{{ title }} Usuario</h6>
+				<h6 class="card-subtitle">{{ title }} Medico</h6>
 
 				<form class="form p-t-20" [formGroup]="formDoctor" (ngSubmit)="onAction()">
 					<div class="form-group">
@@ -17,6 +17,12 @@
 								formControlName="nameDoctor"
 							/>
 						</div>
+					</div>
+					<div class="form-group" *ngIf="title === 'Guardar'">
+						<label for="exampleInputEmail1">Seleciona Hospial!</label>
+						<select class="form-control" formControlName="_id">
+							<option *ngFor="let item of hospitals" [value]="item._id">{{ item.nombre }}</option>
+						</select>
 					</div>
 					<div class="form-group" *ngIf="title === 'Actualizar'">
 						<label for="exampleInputEmail1">Usuario quien lo creo</label>
@@ -48,7 +54,11 @@
 						</div>
 					</div>
 
-					<button type="submit" class="btn btn-success btn-block waves-effect waves-light m-r-10">
+					<button
+						type="submit"
+						[disabled]="formDoctor.invalid"
+						class="btn btn-success btn-block waves-effect waves-light m-r-10"
+					>
 						<i class="fa fa-save"></i>
 						{{ title }} cambios
 					</button>
@@ -77,6 +87,16 @@
 					Cambiar imagen
 				</button>
 			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row animated fadeIn fast" *ngIf="loading">
+	<div class="col-12">
+		<div class="alert alert-info text-center">
+			<h4 class="alert-heading">Cargando</h4>
+			<i class="fa fa-spin fa-refresh fa-2x"></i>
+			<p class="mb-0">Por favor espere</p>
 		</div>
 	</div>
 </div>
